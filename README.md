@@ -29,8 +29,12 @@ python main.py --data-path './AFAD-Full' --model [model_name] --model-type (resn
 
 ## To using the face detection
 - There are two detection method **cv2** and **mediapipe**
+- There are three kind of pretrained model provided above in google drive
+  - resnet50
+  - VIT_small
+  - VIT_base 
 ```
-python 'face detect.py' -f cv2 
+python 'face detect.py' -f cv2  -m [model_name]
 ```
 - We can also detect a single picture instead of make a detection screen
 ```
