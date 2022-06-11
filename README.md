@@ -35,9 +35,9 @@ python main.py --data-path './AFAD-Full' --model vit_base_patch16_224 --model-ty
   - VIT_small
   - VIT_base 
 ```
-python 'face detect.py' -f cv2  -m VIT_small
+python "face detect.py" -f cv2  -m VIT_small
 ```
 - We can also detect a single picture instead of make a detection screen
 ```
-python 'face detect.py' -f cv2 -m VIT_small -p ./picture.png
+python "face detect.py" -f cv2 -m VIT_small -p ./picture.png
 ```
