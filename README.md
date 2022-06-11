@@ -15,8 +15,9 @@ pip install -r requirements.txt
 1. Run **preprocessing.ipynb** and produce **train.csv** and **val.csv**
 2. Run **main.py** and set some arguments
 ```
-python main.py --data-path './AFAD-Full' --model [model_name] --model-type (resnet/transformer)
+python main.py --data-path './AFAD-Full' --model vit_base_patch16_224 --model-type transformer
 ```
+- model-type can be resnet or transformer
 - support model list:
   - vit_base_patch16_224 (v)
   - vit_small_patch16_224 (v)
@@ -34,9 +35,9 @@ python main.py --data-path './AFAD-Full' --model [model_name] --model-type (resn
   - VIT_small
   - VIT_base 
 ```
-python 'face detect.py' -f cv2  -m [model_name]
+python 'face detect.py' -f cv2  -m VIT_small
 ```
 - We can also detect a single picture instead of make a detection screen
 ```
-python 'face detect.py' -f cv2 -p [picture_path]
+python 'face detect.py' -f cv2 -m VIT_small -p ./picture.png
 ```
