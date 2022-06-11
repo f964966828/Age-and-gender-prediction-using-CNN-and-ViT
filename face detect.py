@@ -247,18 +247,22 @@ if __name__ == "__main__":
         img = cv2.imread(parse.picture)
 
         faces = detect(img)
+        ages, genders = faceClassify(img, faces)
+        
+        for i, (left, top, width, height) in enumerate(faces):
 
-        for (left, top, width, height) in faces:
-            age, gender = faceClassify(img[left:left + width, top:top+height])
+            age = ages[i]
+            gender = genders[i]
 
             if gender == Gender.Male:
-                outlineColor = (0,0,255)
-            elif gender == Gender.Female:
                 outlineColor = (255,0,0)
+            elif gender == Gender.Female:
+                outlineColor = (0,0,255)
 
-            cv2.rectangle(img, (left, top), (left + width, top + height), outlineColor, 2)
-            cv2.putText(img, f'Age:{age}', 
-                (left, top + 20), 
+            gender = 'Male' if gender else 'Female'
+            cv2.rectangle(img, (left, top), (left + width, top + height), outlineColor, 6)
+            cv2.putText(img, f'{age} {gender}', 
+                (left, top - 15), 
                 cv2.FONT_HERSHEY_SIMPLEX, 
                 0.75,
                 (0,0,255),
