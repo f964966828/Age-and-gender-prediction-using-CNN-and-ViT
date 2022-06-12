@@ -206,10 +206,9 @@ class Window(Tk):
                 right = left + width
                 bottom = top + height
                 
-                gender = 'Male' if gender else 'Female'
                 rect = self.screen.create_rectangle(left, top, right, bottom, width=6, outline = outlineColor)
                 self.facesRect[self.displayTag].append(rect)
-                text = self.screen.create_text(left, top - 25, text = f'{age} {gender}', anchor='nw', fill='red', font=('Arial', 18))
+                text = self.screen.create_text(left, top - 25, text = f'{age}', anchor='nw', fill='red', font=('Arial', 18))
                 self.facesInfo[self.displayTag].append(text)
 
             #clear last frame faces
@@ -255,14 +254,13 @@ if __name__ == "__main__":
             gender = genders[i]
 
             if gender == Gender.Male:
-                outlineColor = (255,0,0)
-            elif gender == Gender.Female:
                 outlineColor = (0,0,255)
+            elif gender == Gender.Female:
+                outlineColor = (255,0,0)
 
-            gender = 'Male' if gender else 'Female'
             cv2.rectangle(img, (left, top), (left + width, top + height), outlineColor, 6)
-            cv2.putText(img, f'{age} {gender}', 
-                (left, top - 15), 
+            cv2.putText(img, f'{age}', 
+                (left, top - 25), 
                 cv2.FONT_HERSHEY_SIMPLEX, 
                 0.75,
                 (0,0,255),
