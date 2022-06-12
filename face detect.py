@@ -60,7 +60,7 @@ class Window(Tk):
         self.bind('<Escape>', self.on_closeWindow)
         
         #just make self.frameBuffer contain something
-        self.frameBuffer = screenshot(0,0,10,10)
+        self.frameBuffer = screenshot(0,0,100,100)
 
         self.multithread()
 
@@ -235,6 +235,8 @@ if __name__ == "__main__":
         detect = FaceDetector_cv2().detect
     elif parse.faceDetectModule[0] == 'mediapipe':
         detect = FaceDetector_mediapipe().detect
+    elif parse.faceDetectModule[0] == 'mtcnn':
+        detect = FaceDetector_mtcnn().detect
     else:
         raise Exception(f"Face detect module: {parse.faceDetectModule[0]} invalid!")
 

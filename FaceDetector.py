@@ -2,7 +2,7 @@ import cv2
 from numpy import sqrt
 
 class FaceDetector_cv2():
-    def __init__(self, scaleFactor=1.1, minNeighbors=10, maxPixels = 1500000):
+    def __init__(self, scaleFactor=1.1, minNeighbors=10, maxPixels = 150000):
         self.face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
         self.scaleFactor = scaleFactor
         self.minNeighbors = minNeighbors
@@ -51,3 +51,27 @@ class FaceDetector_mediapipe():
                 height = int(detection.location_data.relative_bounding_box.height * imgHeight)
                 faces.append((left, top, width, height))
             return faces
+
+from facenet_pytorch import MTCNN
+import torch
+
+class FaceDetector_mtcnn():
+        def __init__(self):
+            device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+            self.face_detection = MTCNN(keep_all=True, device=device)
+
+        def detect(self, img):
+            print(img.shape)
+            if len(img) == 0 : return []
+            img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            results, _ = self.face_detection.detect(img_rgb)
+            if results is not None : 
+                faces = []
+                for box in zip(results):
+                    x = int(box[0][0])
+                    y = int(box[0][1])
+                    w = int(box[0][2])
+                    h = int(box[0][3])
+                    faces.append((x, y, w-x, h-y))
+                return faces
+            else : return []
